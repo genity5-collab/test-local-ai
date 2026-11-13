@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0b0b13">
+<title>Definitely Real Scanner™</title>
+<style>
+:root{color-scheme:dark;--bg:#0b0b13;--panel:#151522;--line:#29283d;--pink:#ff4f9a;--cyan:#65e7e0;--muted:#a5a4b9}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 15% 5%,#35204b 0,transparent 38%),radial-gradient(ellipse at 90% 90%,#123d48 0,transparent 34%),var(--bg);color:#f7f5ff;font:16px/1.5 system-ui,-apple-system,Segoe UI,sans-serif;display:grid;place-items:center;padding:24px}
+main{width:min(680px,100%);background:#11111ddd;border:1px solid var(--line);border-radius:26px;padding:clamp(22px,5vw,42px);box-shadow:0 24px 90px #0008}
+.tag{display:inline-flex;gap:8px;align-items:center;border:1px solid #3b3852;background:#201d30;color:#c9c5e8;border-radius:99px;padding:6px 12px;font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+h1{font-size:clamp(34px,7vw,58px);line-height:1.02;letter-spacing:-.05em;margin:22px 0 12px}h1 span{color:var(--pink)}
+p{color:var(--muted);margin:0 0 22px}.panel{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:20px;margin:24px 0}
+.row{display:flex;justify-content:space-between;gap:12px;align-items:center}.status{font-weight:700}.small{font-size:13px;color:var(--muted)}
+.track{height:12px;background:#29283a;border-radius:99px;overflow:hidden;margin:16px 0 10px}.fill{height:100%;width:0;background:linear-gradient(90deg,var(--pink),var(--cyan));border-radius:99px;transition:width .18s}
+button{border:0;border-radius:13px;padding:14px 18px;font-weight:800;font-size:15px;cursor:pointer;transition:transform .15s,filter .15s}button:hover{transform:translateY(-2px);filter:brightness(1.1)}button:focus-visible{outline:3px solid var(--cyan);outline-offset:3px}
+.primary{background:linear-gradient(110deg,var(--pink),#a77aff);color:#170d20}.secondary{background:#252438;color:#eeeafa;border:1px solid #403d5c}
+.actions{display:flex;flex-wrap:wrap;gap:10px}.result{display:none;margin-top:18px;border:1px solid #3d685f;background:#142b2a;border-radius:16px;padding:18px}.result h2{margin:0 0 8px;color:var(--cyan);font-size:24px}.result p{margin:0;color:#d0e8e4}
+footer{margin-top:24px;padding-top:18px;border-top:1px solid var(--line);font-size:12px;color:#85839a}
+#toast{min-height:24px;color:var(--cyan);font-size:14px;margin-top:12px}
+</style>
+</head>
+<body>
+<main>
+<div class="tag">✦ Certified internet nonsense <span>•</span> v1.0</div>
+<h1>Definitely Real <span>Scanner™</span></h1>
+<p>Our extremely advanced, absolutely-not-made-up technology will perform a very important check. Please remain dramatically calm.</p>
+<section class="panel" aria-live="polite">
+<div class="row"><span class="status" id="status">System status: suspiciously normal</span><span class="small" id="percent">0%</span></div>
+<div class="track"><div class="fill" id="fill"></div></div>
+<div class="small" id="detail">Waiting for an extremely official button press…</div>
+</section>
+<div class="actions">
+<button class="primary" id="scan">Run totally real scan ✨</button>
+<button class="secondary" id="doubt">I have doubts</button>
+</div>
+<div id="toast" role="status"></div>
+<section class="result" id="result">
+<h2>🚨 Diagnosis complete</h2>
+<p>Your device is 100% normal. The only detected issue is an unusually high level of silliness. Recommended treatment: drink some water and send this prank to a friend (only if they enjoy jokes).</p>
+</section>
+<footer>PARODY / PRANK APP. This page does not scan your device, access files, collect data, install anything, or run a security check. It is just a tiny joke.</footer>
+</main>
+<script>
+const scan=document.querySelector('#scan'),doubt=document.querySelector('#doubt'),fill=document.querySelector('#fill'),percent=document.querySelector('#percent'),status=document.querySelector('#status'),detail=document.querySelector('#detail'),result=document.querySelector('#result'),toast=document.querySelector('#toast');
+let running=false;
+const steps=['Calibrating the nonsense detector…','Asking 3 imaginary hamsters for approval…','Measuring your snack-powered energy…','Checking if your keyboard is secretly a potato…','Preparing a very serious conclusion…'];
+scan.addEventListener('click',()=>{
+ if(running)return;running=true;scan.disabled=true;result.style.display='none';toast.textContent='';let value=0;
+ const timer=setInterval(()=>{value=Math.min(100,value+Math.ceil(Math.random()*13));fill.style.width=value+'%';percent.textContent=value+'%';status.textContent=value<100?'Analysis in progress…':'Scan complete!';
+ detail.textContent=value===100?'Results are ready. Brace for absolutely nothing.':steps[Math.min(steps.length-1,Math.floor(value/22))];
+ if(value===100){clearInterval(timer);result.style.display='block';toast.textContent='✨ Surprise! You have been officially trolled.';scan.disabled=false;running=false;}
+ },180);
+});
+doubt.addEventListener('click',()=>{toast.textContent=['Your doubts have been noted by the Council of Ducks. 🦆','Suspicion level: completely reasonable.','The scanner says: trust your instincts.'][Math.floor(Math.random()*3)];});
+</script>
+</body>
+</html>
